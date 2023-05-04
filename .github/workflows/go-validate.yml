@@ -8,6 +8,7 @@ on:
   push:
     branches:
       - 'main'
+      - 'master'
       - release/**
   pull_request:
 
@@ -74,4 +75,7 @@ jobs:
       - uses: actions/setup-go@4d34df0c2316fe8122ab82dc22947d607c0c91f9 # v4.0.0
         with:
           go-version: ${{ needs.get-go-version.outputs.go-version }}
-      - run: make generate-check
+      - run: |
+          cd ../ && mv hashicorp-packer packer && cd packer
+          make generate-check
+          cd ../ && mv packer hashicorp-packer && cd hashicorp-packer
