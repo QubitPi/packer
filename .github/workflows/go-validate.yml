@@ -76,6 +76,11 @@ jobs:
         with:
           go-version: ${{ needs.get-go-version.outputs.go-version }}
       - run: |
+          # Temporarily rename repo back to upstream name during make "generate-check" command run because
+          # the command requires the repo name to be "packer"
           cd ../ && mv hashicorp-packer packer && cd packer
+          
           make generate-check
+          
+          # Rename back because GitHub Action post processing requires the original checked-out repo name
           cd ../ && mv packer hashicorp-packer && cd hashicorp-packer
