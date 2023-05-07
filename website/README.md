@@ -1,3 +1,7 @@
+See [more details on how documentation is build][Forked HashiCorp Dev Portal]
+
+[Forked HashiCorp Dev Portal]: https://github.com/QubitPi/hashicorp-dev-portal
+
 # Packer Documentation Website
 
 This subdirectory contains the content for the [Packer Website](https://packer.io/).
