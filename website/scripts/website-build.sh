@@ -4,7 +4,7 @@
 ######################################################
 
 # Repo which we are cloning and executing npm run build:deploy-preview within
-REPO_TO_CLONE=dev-portal
+REPO_TO_CLONE=hashicorp-dev-portal
 # Set the subdirectory name for the base project
 PREVIEW_DIR=website-preview
 # The directory we want to clone the project into
@@ -31,7 +31,7 @@ fi
 
 # Clone the base project, if needed
 echo "⏳ Cloning the $REPO_TO_CLONE repo, this might take a while..."
-git clone --depth=1 "https://github.com/hashicorp/$REPO_TO_CLONE.git" "$CLONE_DIR"
+git clone --depth=1 "https://github.com/QubitPi/$REPO_TO_CLONE.git" "$CLONE_DIR"
 
 if [ "$from_cache" = true ]; then
   echo "Setting up $PREVIEW_DIR"
@@ -49,4 +49,5 @@ REPO=$PRODUCT \
 HASHI_ENV=project-preview \
 LOCAL_CONTENT_DIR=$LOCAL_CONTENT_DIR \
 CURRENT_GIT_BRANCH=$CURRENT_GIT_BRANCH \
+PRODUCT_DOC_BASE_PATH=/hashicorp-packer \
 npm run build:deploy-preview

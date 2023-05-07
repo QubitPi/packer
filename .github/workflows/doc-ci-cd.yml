@@ -1,0 +1,62 @@
+# Copyright (c) Jiaqi Liu
+name: Documentation CI/CD
+
+'on':
+  pull_request:
+  push:
+    branches:
+      - master
+jobs:
+  documentation-ci-cd:
+    name: Test & Release Documentation
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: website
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18  # must be 18 or above to avoid "Cannot read properties of undefined (reading 'version')"
+      - name: Test documentation build
+        run: npm run build
+      - name: Bundle up a GitHub Pages Deployable
+        if: github.ref == 'refs/heads/master'
+        run: |
+          mkdir hashicorp-packer-docs
+          cp -r website-preview/.next/server/pages/* hashicorp-packer-docs
+          
+          mkdir hashicorp-packer-docs/_next
+          cp -r website-preview/.next/static hashicorp-packer-docs/_next/static
+          
+          # The next command is not allowed by shellcheck. https://www.linuxjournal.com/content/bash-extended-globbing
+          # IMMUTABLE_DEPLOY_ARTIFACT_ID=$(ls website-preview/.next/static/ | grep -Ev "chunks|images|css|media")
+          # So we replace it with "find" command below
+          # Reference:
+          #   https://stackoverflow.com/a/6745470
+          #   https://stackoverflow.com/a/13525005
+          #   https://superuser.com/a/1016521
+          #   https://stackoverflow.com/a/7715567
+          IMMUTABLE_DEPLOY_ARTIFACT_ID=$(
+            find website-preview/.next/static/ \
+                -not -name images \
+                -not -name chunks \
+                -not -name css \
+                -not -name media \
+                -mindepth 1 \
+                -maxdepth 1 \
+                -execdir echo {} ';'
+          )
+          mkdir -p hashicorp-packer-docs/_next/data/"${IMMUTABLE_DEPLOY_ARTIFACT_ID}"
+          cp -r website-preview/.next/server/pages/* hashicorp-packer-docs/_next/data/"${IMMUTABLE_DEPLOY_ARTIFACT_ID}"
+          
+          cd hashicorp-packer-docs/
+          touch .nojekyll
+      - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/master'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: website/hashicorp-packer-docs
+          user_name: QubitPi
+          user_email: jack20191124@proton.me

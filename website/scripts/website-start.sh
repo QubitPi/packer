@@ -4,7 +4,7 @@
 ######################################################
 
 # Repo which we are cloning and executing npm run build:deploy-preview within
-REPO_TO_CLONE=dev-portal
+REPO_TO_CLONE=hashicorp-dev-portal
 # Set the subdirectory name for the dev-portal app
 PREVIEW_DIR=website-preview
 # The product for which we are building the deploy preview
@@ -24,7 +24,7 @@ should_pull=true
 # Clone the dev-portal project, if needed
 if [ ! -d "$PREVIEW_DIR" ]; then
     echo "⏳ Cloning the $REPO_TO_CLONE repo, this might take a while..."
-    git clone --depth=1 https://github.com/hashicorp/$REPO_TO_CLONE.git "$PREVIEW_DIR"
+    git clone --depth=1 https://github.com/QubitPi/$REPO_TO_CLONE.git "$PREVIEW_DIR"
     should_pull=false
 fi
 
@@ -41,4 +41,5 @@ PREVIEW_FROM_REPO=$PRODUCT \
 LOCAL_CONTENT_DIR=$LOCAL_CONTENT_DIR \
 CURRENT_GIT_BRANCH=$CURRENT_GIT_BRANCH \
 PREVIEW_MODE=$PREVIEW_MODE \
+PRODUCT_DOC_BASE_PATH=/hashicorp-packer \
 npm run start:local-preview
