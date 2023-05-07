@@ -8,6 +8,7 @@ on:
   push:
     branches:
       - 'main'
+      - 'master'
       - release/**
   pull_request:
 
@@ -74,4 +75,12 @@ jobs:
       - uses: actions/setup-go@cdcb36043654635271a94b9a6d1392de5bb323a7 # v5.0.1
         with:
           go-version: ${{ needs.get-go-version.outputs.go-version }}
-      - run: make generate-check
+      - run: |
+          # Temporarily rename repo back to upstream name during make "generate-check" command run because
+          # the command requires the repo name to be "packer"
+          cd ../ && mv hashicorp-packer packer && cd packer
+          
+          make generate-check
+          
+          # Rename back because GitHub Action post processing requires the original checked-out repo name
+          cd ../ && mv packer hashicorp-packer && cd hashicorp-packer
