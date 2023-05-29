@@ -16,7 +16,7 @@ on:
       - release/**
 
 env:
-  REPO_NAME: "packer"
+  REPO_NAME: "hashicorp-packer"
 
 permissions:
   contents: read
@@ -236,8 +236,6 @@ jobs:
       version: ${{ needs.set-product-version.outputs.product-version }}
     steps:
       - uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3.5.2
-      - name: Rename "hashicorp-packer" to "packer"
-        run: cd ../ && mv hashicorp-packer packer && cd packer
       - name: Docker Build (Action)
         uses: hashicorp/actions-docker-build@v1
         with:
