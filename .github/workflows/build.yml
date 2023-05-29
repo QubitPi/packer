@@ -16,7 +16,7 @@ on:
       - release/**
 
 env:
-  REPO_NAME: "packer"
+  REPO_NAME: "hashicorp-packer"
 
 permissions:
   contents: read
