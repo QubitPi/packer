@@ -246,6 +246,8 @@ jobs:
       version: ${{ needs.set-product-version.outputs.product-version }}
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - name: Rename "hashicorp-packer" to "packer"
+        run: cd ../ && mv hashicorp-packer packer && cd packer
       - name: Docker Build (Action)
         uses: hashicorp/actions-docker-build@v2
         with:
