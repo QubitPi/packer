@@ -6,6 +6,7 @@ name: Documentation CI/CD
   push:
     branches:
       - master
+
 jobs:
   documentation-ci-cd:
     name: Test & Release Documentation
