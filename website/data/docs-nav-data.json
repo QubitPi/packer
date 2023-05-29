@@ -24,6 +24,13 @@
     "divider": true
   },
   {
+    "title": "Getting Started with AWS",
+    "path": "aws-get-started"
+  },
+  {
+    "divider": true
+  },
+  {
     "title": "Terminology",
     "path": "terminology"
   },
