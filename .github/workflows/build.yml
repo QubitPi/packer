@@ -265,6 +265,7 @@ jobs:
 
   build-docker-full:
     name: Docker full ${{ matrix.arch }} build
+    if: github.repository != 'QubitPi/hashicorp-packer'
     needs:
       - set-product-version
       - build-linux
