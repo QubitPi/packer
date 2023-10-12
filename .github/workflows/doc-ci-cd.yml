@@ -21,6 +21,7 @@ jobs:
           node-version: 18  # must be 18 or above to avoid "Cannot read properties of undefined (reading 'version')"
       - name: Test documentation build
         run: npm run build
+        continue-on-error: true # HC closed source tutorials page, we can't get it anyway
       - name: Bundle up a GitHub Pages Deployable
         if: github.ref == 'refs/heads/master'
         run: |
@@ -60,4 +61,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: website/hashicorp-packer-docs
           user_name: QubitPi
-          user_email: jack20191124@proton.me
+          user_email: jack20220723@gmail.com
