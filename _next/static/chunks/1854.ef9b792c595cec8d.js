@@ -1,0 +1,1 @@
+(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[1854],{61854:function(t,n,e){"use strict";e.r(n),e.d(n,{default:function(){return s}});var r=e(85893),o=e(20312),u=e.n(o);function s(t){let{children:n}=t;return(0,r.jsx)("div",{className:u().root,children:n})}},20312:function(t){t.exports={root:"style_root__rpAp5"}}}]);
