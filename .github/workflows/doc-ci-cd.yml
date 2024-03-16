@@ -23,7 +23,7 @@ jobs:
         run: npm run build
         continue-on-error: true # HC closed source tutorials page, we can't get it anyway
       - name: Bundle up a GitHub Pages Deployable
-        if: github.ref == 'refs/heads/master'
+        # if: github.ref == 'refs/heads/master'
         run: |
           mkdir hashicorp-packer-docs
           cp -r website-preview/.next/server/pages/* hashicorp-packer-docs
