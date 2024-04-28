@@ -49,5 +49,5 @@ REPO=$PRODUCT \
 HASHI_ENV=project-preview \
 LOCAL_CONTENT_DIR=$LOCAL_CONTENT_DIR \
 CURRENT_GIT_BRANCH=$CURRENT_GIT_BRANCH \
-PRODUCT_DOC_BASE_PATH=/hashicorp-packer \
+PRODUCT_DOC_BASE_PATH="" \
 npm run build:deploy-preview
